@@ -1,0 +1,27 @@
+
+name: Avvio bot Telegram
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  avvio:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Scarica repository
+        uses: actions/checkout@v4
+
+      - name: Configura Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Avvia bot
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAMTOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAMCHATID }}
+        run: python main.py
